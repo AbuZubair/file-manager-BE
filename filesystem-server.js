@@ -15,7 +15,10 @@ const fs = require('fs');
 var cors = require('cors');
 const pattern = /(\.\.\/)/g;
 
-const contentRootPath = yargs.argv.d;
+require("dotenv").config();
+
+const contentRootPath = process.env.ROOTPATH;
+console.log(contentRootPath)
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -1107,10 +1110,6 @@ app.post('/', function (req, res) {
 /**
  * Server serving port
  */
-var runPort = process.env.PORT || 8090;
-var server = app.listen(runPort, function () {
-    server.setTimeout(10 * 60 * 1000);
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log("Example app listening at http://%s:%s", host, port);
-});
+var runPort = process.env.PORT || 3001;
+
+app.listen(runPort, () => console.log(`Server running on localhost:${runPort}`));
